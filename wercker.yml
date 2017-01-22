@@ -15,11 +15,11 @@ build:
     - script:
         name: clone firmware
         code: |
-          git clone https://github.com/ShuheiKubota/qmk_firmware_my.git
-          ln -s $WERCKER_SOURCE_DIR qmk_firmware_my/keyboards/ergodox/keymaps/my
+          git clone https://github.com/ShuheiKubota/qmk_firmware.git
+          ln -s $WERCKER_SOURCE_DIR qmk_firmware/keyboards/ergodox/keymaps/my
     - script:
         name: build keymap
-        cwd: $WERCKER_SOURCE_DIR/qmk_firmware_my
+        cwd: $WERCKER_SOURCE_DIR/qmk_firmware
         code: |
           make keyboard=ergodox keymap=my
 deploy:
@@ -31,4 +31,4 @@ deploy:
     - script:
         name: upload built hex file to Google Drive.
         code: |
-          gdrive --refresh-token $GDRIVE_REFRESH_TOKEN upload --parent $GDRIVE_FOLDER $WERCKER_SOURCE_DIR/qmk_firmware_my/ergodox_ez_my.hex
+          gdrive --refresh-token $GDRIVE_REFRESH_TOKEN upload --parent $GDRIVE_FOLDER $WERCKER_SOURCE_DIR/qmk_firmware/ergodox_ez_my.hex
