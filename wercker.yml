@@ -16,12 +16,12 @@ build:
         name: clone firmware
         code: |
           git clone https://github.com/ShuheiKubota/qmk_firmware_my.git
-          ln -s $WERCKER_SOURCE_DIR qmk_firmware_my/keyboards/ergodox/keymaps/target_keymap
+          ln -s $WERCKER_SOURCE_DIR qmk_firmware_my/keyboards/ergodox/keymaps/my
     - script:
         name: build keymap
         cwd: $WERCKER_SOURCE_DIR/qmk_firmware_my
         code: |
-          make keyboard=ergodox keymap=target_keymap
+          make keyboard=ergodox keymap=my
 deploy:
   steps:
     - script:
@@ -31,4 +31,4 @@ deploy:
     - script:
         name: upload built hex file to bintray.
         code: |
-          gdrive --refresh-token $GDRIVE_REFRESH_TOKEN upload --parent $GDRIVE_FOLDER $WERCKER_SOURCE_DIR/qmk_firmware_my/ergodox_ez_target_keymap.hex
+          gdrive --refresh-token $GDRIVE_REFRESH_TOKEN upload --parent $GDRIVE_FOLDER $WERCKER_SOURCE_DIR/qmk_firmware_my/ergodox_ez_my.hex
