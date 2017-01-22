@@ -31,4 +31,6 @@ deploy:
     - script:
         name: upload built hex file to Google Drive.
         code: |
+          filename=ergodox_ez_my.hex
+          gdrive --refresh-token $GDRIVE_REFRESH_TOKEN delete `gdrive --refresh-token $GDRIVE_REFRESH_TOKEN list --query " name = '$filename' and '$GDRIVE_FOLDER' in parents " --no-header --max 1` || :
           gdrive --refresh-token $GDRIVE_REFRESH_TOKEN upload --parent $GDRIVE_FOLDER $WERCKER_SOURCE_DIR/qmk_firmware/ergodox_ez_my.hex
